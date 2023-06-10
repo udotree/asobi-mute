@@ -10,46 +10,60 @@ storage.watch({
     }
 })
 
+    ; (async () => {
+        muteList = await storage.get("userList")
+    })()
+
 
 export const config: PlasmoCSConfig = {
     matches: ["https://asobistage.asobistore.jp/*"],
     all_frames: true
 }
 
-
-window.addEventListener("load", () => {
-
-    setTimeout(() => {
+let id: NodeJS.Timer = null
 
 
+const setObserver = () => {
 
-        const target = document.querySelector("div[class^='commentViewer_commentList__'] > div:nth-child(2) > div > div")
-        if (!target) {
-            return
-        }
-        const observer = new MutationObserver(function (mutations) {
-            for (var m of mutations) {
-                for (var comment of m.addedNodes) {
-                    const element = comment as any
-                    var name = element.querySelector("*[class^='commentViewer_item_nickName_link']")
-                    var text = element.querySelector("*[class^='commentViewer_item_comment']")
-                    if (!name || !text) {
-                        continue
-                    }
 
-                    if (muteList.includes(name.innerText)) {
-                        name.innerText = ""
-                        text.innerHTML = "<i style='color: #666;'>muted</i>"
-                    }
+
+    let target = document.querySelector("div[class^='commentViewer_commentList__'] > div:nth-child(2) > div > div")
+    if (!target) {
+        target = document.querySelector("*[data-test-id='virtuoso-item-list']")
+    }
+    if (!target) {
+        return
+    }
+
+    console.log("comment watching!")
+    clearInterval(id)
+
+    const observer = new MutationObserver(function (mutations) {
+        for (var m of mutations) {
+            for (var comment of m.addedNodes) {
+                const element = comment as any
+                var name = element.querySelector("*[class*='item_nickName_link']")
+                var text = element.querySelector("*[class*='item_comment']")
+                if (!name || !text) {
+                    continue
+                }
+
+                if (muteList.includes(name.innerText)) {
+                    name.innerText = ""
+                    text.innerHTML = "<i style='color: #666;'>muted</i>"
                 }
             }
-        });
+        }
+    });
 
-        observer.observe(target, { attributes: true, childList: true })
+    observer.observe(target, { attributes: true, childList: true })
 
-    }, 3000);
+}
 
 
+
+window.addEventListener("load", () => {
+    id = setInterval(setObserver, 1000);
 })
 
 export { }
