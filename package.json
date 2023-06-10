@@ -1,8 +1,8 @@
 {
-  "name": "asomi-mute",
-  "displayName": "Asomi mute",
-  "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "name": "asobi-mute",
+  "displayName": "Asobi mute",
+  "version": "1.0.0",
+  "description": "ASOBISTAGEのコメントに、ミュート機能を提供します。",
   "author": "udop",
   "packageManager": "npm@8.19.3",
   "scripts": {
@@ -11,18 +11,16 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.6.1",
     "plasmo": "0.73.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
     "@types/chrome": "0.0.237",
     "@types/node": "20.2.4",
-    "@types/react": "18.2.7",
-    "@types/react-dom": "18.2.4",
     "prettier": "2.8.8",
-    "typescript": "5.0.4",
-    "@plasmohq/prettier-plugin-sort-imports": "3.6.4"
+    "typescript": "5.0.4"
   },
   "manifest": {
     "host_permissions": [
