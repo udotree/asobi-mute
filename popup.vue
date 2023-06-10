@@ -23,7 +23,6 @@ const remove = (user: string) => {
 }
 
 const update = async () => {
-    console.log("update!")
     await storage.set("userList", userList.value)
 }
 

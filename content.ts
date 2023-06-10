@@ -34,7 +34,6 @@ window.addEventListener("load", () => {
                     var name = element.querySelector("*[class^='commentViewer_item_nickName_link']")
                     var text = element.querySelector("*[class^='commentViewer_item_comment']")
                     if (!name || !text) {
-                        console.log(name, text)
                         continue
                     }
 
