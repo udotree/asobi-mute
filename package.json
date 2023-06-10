@@ -1,8 +1,8 @@
 {
-  "name": "asomi-mute",
-  "displayName": "Asomi mute",
-  "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "name": "asobi-mute",
+  "displayName": "Asobi mute",
+  "version": "1.0.0",
+  "description": "ASOBISTAGEのコメントに、ミュート機能を提供します。",
   "author": "udop",
   "packageManager": "npm@8.19.3",
   "scripts": {
@@ -11,6 +11,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.6.1",
     "plasmo": "0.73.7",
     "vue": "^3.3.4"
   },
