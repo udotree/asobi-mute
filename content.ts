@@ -8,11 +8,11 @@ storage.watch({
     "userList": (c) => {
         muteList = c.newValue
     }
-})
+});
 
-    ; (async () => {
-        muteList = await storage.get("userList")
-    })()
+(async () => {
+    muteList = await storage.get("userList")
+})()
 
 
 export const config: PlasmoCSConfig = {
@@ -21,11 +21,7 @@ export const config: PlasmoCSConfig = {
 }
 
 let id: NodeJS.Timer = null
-
-
 const setObserver = () => {
-
-
 
     let target = document.querySelector("div[class^='commentViewer_commentList__'] > div:nth-child(2) > div > div")
     if (!target) {
@@ -35,7 +31,7 @@ const setObserver = () => {
         return
     }
 
-    console.log("comment watching!")
+    console.log("[asobi-mute] start comment watching!")
     clearInterval(id)
 
     const observer = new MutationObserver(function (mutations) {
