@@ -1,7 +1,7 @@
 {
   "name": "asobi-mute",
   "displayName": "Asobi mute",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "ASOBISTAGEのコメントに、ミュート機能を提供します。",
   "author": "udop",
   "packageManager": "npm@8.19.3",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@plasmohq/storage": "^1.6.1",
-    "plasmo": "0.73.7",
+    "plasmo": "^0.81.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

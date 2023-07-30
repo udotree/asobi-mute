@@ -12,6 +12,9 @@ storage.watch({
 
 (async () => {
     muteList = await storage.get("userList")
+    if (!Array.isArray(muteList)) {
+        muteList = []
+    }
 })()
 
 
@@ -20,19 +23,18 @@ export const config: PlasmoCSConfig = {
     all_frames: true
 }
 
-let id: NodeJS.Timer = null
-const setObserver = () => {
+let target: Element | null = null
+const setObserver = (): boolean => {
 
-    let target = document.querySelector("div[class^='commentViewer_commentList__'] > div:nth-child(2) > div > div")
+    target = document.querySelector("div[class^='commentViewer_commentList__'] > div:nth-child(2) > div > div")
     if (!target) {
         target = document.querySelector("*[data-test-id='virtuoso-item-list']")
     }
     if (!target) {
-        return
+        return false
     }
 
     console.log("[asobi-mute] start comment watching!")
-    clearInterval(id)
 
     const observer = new MutationObserver(function (mutations) {
         for (var m of mutations) {
@@ -53,13 +55,25 @@ const setObserver = () => {
     });
 
     observer.observe(target, { attributes: true, childList: true })
+    return true
 
 }
 
-
-
+let set = false
 window.addEventListener("load", () => {
-    id = setInterval(setObserver, 1000);
+    console.log("[asobi-mute] try to set observer...")
+    setInterval(() => {
+        if (target != null && document.body.contains(target)) {
+            return
+        }
+        if (set) {
+            set = false
+            console.log("[asobi-mute] retry to set observer...")
+        }
+        set = setObserver()
+    }, 1000)
 })
+
+
 
 export { }
